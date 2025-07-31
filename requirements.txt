@@ -1,0 +1,4 @@
+langgraph
+langchain_openai
+
+yfinance
