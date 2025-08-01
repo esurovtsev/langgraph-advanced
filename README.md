@@ -8,7 +8,7 @@ This repository continues the LangGraph learning journey with a collection of ad
 
 ```bash
 git clone git@github.com:esurovtsev/langgraph-advanced.git
-cd langsmith-advanced
+cd langgraph-advanced
 ```
 
 ### 2. Set Up Your Python Environment
