@@ -46,7 +46,13 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
    - Walks through constructing a state graph for agent execution, including system and tool nodes, routing, and memory management
    - Real-world scenario: Building an agent that fetches and analyzes financial data for companies (e.g., Tesla), showing the full reasoning and tool invocation loop
    - [LangGraph Advanced – Build AI Agents with Prebuilt Agents and Memory](https://www.youtube.com/watch?v=_0-OoRyFwpo)
-2. **Lesson 2:** (Coming soon)
+2. **Dynamic Models & Prompt Customization** ([02_dynamic-models-prompts.ipynb](02_dynamic-models-prompts.ipynb))
+   - Advanced techniques for creating adaptive AI agents with dynamic model selection and role switching
+   - Implementing context-aware model selection that chooses different LLMs based on task complexity (e.g., GPT-4 for analysis, GPT-4o-mini for summarization)
+   - Creating dynamic prompt modifiers that adapt agent roles and behaviors in response to user queries
+   - Combining both techniques to build sophisticated agents that can switch between financial advisor, teacher, or summarizer roles
+   - Real-world example: Building a financial analysis agent that adapts both its underlying model and persona based on query complexity
+   - [LangGraph Advanced – Build AI Agents with Dynamic Model Selection and Role Switching](https://www.youtube.com/watch?v=bV1K8B4m5PI)
 3. **Lesson 3:** (Coming soon)
 
 *This list will be updated as new lessons are added. Each lesson will include code, explanations, and a video walkthrough.*
