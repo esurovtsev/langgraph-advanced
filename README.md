@@ -53,7 +53,13 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
    - Combining both techniques to build sophisticated agents that can switch between financial advisor, teacher, or summarizer roles
    - Real-world example: Building a financial analysis agent that adapts both its underlying model and persona based on query complexity
    - [LangGraph Advanced – Build AI Agents with Dynamic Model Selection and Role Switching](https://www.youtube.com/watch?v=bV1K8B4m5PI)
-3. **Lesson 3:** (Coming soon)
+3. **Structured Output with Prebuilt Agents** ([03_structured_output_with_prebuilt_agents.ipynb](03_structured_output_with_prebuilt_agents.ipynb))
+   - Why structured output matters for production apps that need machine-readable results, not just chat text
+   - Define a Pydantic schema (e.g., `FinancialInfo`) and pass it via `response_format` to `create_react_agent` (v2)
+   - Understand the added graph step to generate a structured response and how to access it from the agent state
+   - Trade-offs: extra LLM call cost; alternatives include treating the schema as a tool or using a post-model hook with custom state to capture JSON without extra calls
+   - Real-world example: TSLA analysis producing JSON fields like company_name, stock_symbol, current_price, market_cap, summary, risk_assessment
+   - [LangGraph Advanced – Generate Structured Output in AI Agents Using Prebuilt LangGraph APIs](https://www.youtube.com/watch?v=3Q31aObRBMo)
 
 *This list will be updated as new lessons are added. Each lesson will include code, explanations, and a video walkthrough.*
 
