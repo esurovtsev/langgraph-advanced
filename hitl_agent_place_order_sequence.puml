@@ -1,0 +1,55 @@
+@startuml HITL_Trade_Execution
+Title Human-in-the-loop Trade Flow
+
+skinparam sequence {
+  ParticipantBackgroundColor #FFFFFF
+  ParticipantBorderColor #999999
+  ActorBackgroundColor #FFF2CC
+  ActorBorderColor #C9A227
+  ControlBackgroundColor #E6F2FF
+  ControlBorderColor #2C69C8
+  LifeLineBorderColor #BBBBBB
+  GroupHeaderBackgroundColor #F7F7F7
+  GroupBorderColor #2EAD74
+  ArrowColor #555555
+}
+
+actor User
+control "Agent <<LLM>>" as Agent #B3D4FF
+box "Tools" #E6F9ED
+  participant lookup_stock
+  participant fetch_stock_data
+  participant place_order
+end box
+
+== Request ==
+User -> Agent: Buy $1000 of company
+
+== Research ==
+Agent -> lookup_stock: Find ticker
+lookup_stock --> Agent: Ticker
+
+Agent -> fetch_stock_data: Get company data
+fetch_stock_data --> Agent: Financial data
+Agent -> Agent: Extract current price
+note over Agent
+  Extracts current price from the
+  returned financial data
+end note
+Agent -> Agent: Calculate shares
+
+== Prepare order ==
+Agent -> place_order: Place order
+
+group Approval required
+  Agent --> User: Request approval
+  User --> Agent: Approve
+end group
+
+== Execution ==
+place_order --> Agent: Order details
+
+== Report ==
+Agent --> User: Order confirmation
+
+@enduml
