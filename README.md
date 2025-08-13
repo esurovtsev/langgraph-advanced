@@ -60,7 +60,20 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
    - Trade-offs: extra LLM call cost; alternatives include treating the schema as a tool or using a post-model hook with custom state to capture JSON without extra calls
    - Real-world example: TSLA analysis producing JSON fields like company_name, stock_symbol, current_price, market_cap, summary, risk_assessment
    - [LangGraph Advanced – Generate Structured Output in AI Agents Using Prebuilt LangGraph APIs](https://www.youtube.com/watch?v=3Q31aObRBMo)
-
+4. **Human-in-the-Loop Interruption with Prebuilt Agents** ([04_prebuilt_hitl_dynamic_interrupt.ipynb](04_prebuilt_hitl_dynamic_interrupt.ipynb))
+   - When and why to add human approvals for risky actions (e.g., placing market/limit orders)
+   - Two approaches:
+     - Static: `interrupt_before=["tools"]` to always pause before the tools node (simple but coarse-grained)
+     - Dynamic: raise `interrupt(...)` inside `post_model_hook` when the LLM proposes a risky tool call
+   - Implementation details:
+     - Maintain `RISKY_TOOLS = {"place_order"}` and inspect the last `AIMessage.tool_calls`
+     - Enable a checkpointer (e.g., `InMemorySaver`) and pass a `thread_id` so runs can be paused and resumed
+     - Read the interruption payload from the response to render an approval UI, then resume with a `Command(...)` carrying the decision
+   - Resume paths:
+     - Approve: proceed to execute the tool normally
+     - Decline: inject a `ToolMessage` like “Action cancelled by human” and continue the agent flow without executing the tool
+   - Real-world example: Buying TSLA shares with approve/decline flows demonstrated end-to-end
+   - [LangGraph Advanced – Use Dynamic Human in the Loop Interruption in Prebuilt AI Agents](https://www.youtube.com/watch?v=8_UQNWTbvEQ)
 *This list will be updated as new lessons are added. Each lesson will include code, explanations, and a video walkthrough.*
 
 
