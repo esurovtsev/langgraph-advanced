@@ -74,8 +74,17 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
      - Decline: inject a `ToolMessage` like “Action cancelled by human” and continue the agent flow without executing the tool
    - Real-world example: Buying TSLA shares with approve/decline flows demonstrated end-to-end
    - [LangGraph Advanced – Use Dynamic Human in the Loop Interruption in Prebuilt AI Agents](https://www.youtube.com/watch?v=8_UQNWTbvEQ)
+5. **Multi-Agent Systems with Supervisor Architecture** ([05_multi_agent_supervisor.ipynb](05_multi_agent_supervisor.ipynb))
+   - Build a supervisor-led multi-agent system that delegates between specialized workers
+   - Define `research_agent` (Tavily + Wikipedia) to pick ONE company with a brief rationale
+   - Define `trading_agent` (ticker lookup, market data via yfinance, order placement) to execute trades from a budget
+   - Use `create_supervisor` to orchestrate routing, handoffs, and guardrails; view graph and xray
+   - Establish shared time context via a `current_timestamp` tool and post a one-line “NOW” note for recency
+   - Routing rules: thematic/ambiguous → research; explicit company + action/budget → trading; ask once if a key detail is missing
+   - Handoff: pass chosen company from research to trading; avoid fabricating data; summarize delegated steps and results
+   - Real-world flow: invest $1,000 in AI/renewables—research selects a company, trading sizes the order and places a buy
+   - [LangGraph Advanced – Build Multi-Agent AI Systems with Supervisor Architecture](https://www.youtube.com/watch?v=TK9kf6a9i10)
 *This list will be updated as new lessons are added. Each lesson will include code, explanations, and a video walkthrough.*
-
 
 ## Contributing
 
