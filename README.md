@@ -84,7 +84,7 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
    - Handoff: pass chosen company from research to trading; avoid fabricating data; summarize delegated steps and results
    - Real-world flow: invest $1,000 in AI/renewables—research selects a company, trading sizes the order and places a buy
    - [LangGraph Advanced – Build Multi-Agent AI Systems with Supervisor Architecture](https://www.youtube.com/watch?v=TK9kf6a9i10)
-*This list will be updated as new lessons are added. Each lesson will include code, explanations, and a video walkthrough.*
+
 
 ## Contributing
 
