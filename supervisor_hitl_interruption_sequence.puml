@@ -1,0 +1,49 @@
+@startuml Supervisor_HITL_Interrupt_Resume
+Title Supervisor HITL Interrupt/Resume
+
+skinparam sequence {
+  ParticipantBackgroundColor #FFFFFF
+  ParticipantBorderColor #999999
+  ActorBackgroundColor #FFF2CC
+  ActorBorderColor #C9A227
+  ControlBackgroundColor #E6F2FF
+  ControlBorderColor #2C69C8
+  LifeLineBorderColor #BBBBBB
+  GroupHeaderBackgroundColor #F7F7F7
+  GroupBorderColor #2EAD74
+  ArrowColor #555555
+}
+
+boundary "Client (host app)" as Client
+control "Supervisor <<LLM>>" as Supervisor #B3D4FF
+control "Trading Agent <<LLM>>" as Trading #B3D4FF
+
+== Request ==
+Client -> Supervisor: Goal
+
+== Delegate ==
+Supervisor -> Trading: Route to Trading
+
+== Interrupt ==
+Trading --> Supervisor: interrupt(payload)
+note over Supervisor
+  Single checkpointer (parent-only)
+  Resume on Supervisor with same thread_id
+end note
+
+Supervisor --> Client: emit interrupt(payload)
+
+== Resume ==
+Client --> Supervisor: Command(resume={approved: true})
+Supervisor -> Trading: deliver resume
+Trading --> Supervisor: Result
+
+== Report ==
+Supervisor --> Client: Summary
+
+note over Trading
+  No checkpointer in child;
+  interrupt bubbles up to Supervisor
+end note
+
+@enduml

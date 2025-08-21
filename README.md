@@ -85,7 +85,19 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
    - Real-world flow: invest $1,000 in AI/renewables—research selects a company, trading sizes the order and places a buy
    - [LangGraph Advanced – Build Multi-Agent AI Systems with Supervisor Architecture](https://www.youtube.com/watch?v=TK9kf6a9i10)
 
-
+6. **Supervisor + Human-in-the-Loop in Multi-Agent Systems** ([06_supervisor_with_hitl.ipynb](06_supervisor_with_hitl.ipynb))
+   - Combine supervisor-led delegation with HITL approvals inside child agents (e.g., `trading_agent`).
+   - Child interruptions bubble to the supervisor when the checkpointer is owned by the parent; resume the run by invoking the supervisor (not the child) with the same `thread_id`.
+   - Implementation:
+     - `trading_agent` uses a `post_model_hook` (`halt_on_risky_tools`) to detect `RISKY_TOOLS = {"place_order"}` and call `interrupt({"awaiting": name, "args": {...}})`.
+     - On decline, inject a `ToolMessage` like “Cancelled by human…” and continue planning without executing the tool.
+     - Supervisor compiled with `InMemorySaver()` (`.compile(checkpointer=...)`) and `output_mode="full_history"`; visualize routing with `xray`.
+     - Interact only with the supervisor; to resume, use `Command(resume={"approved": True|False})` and a stable `configurable.thread_id`.
+     - Inspect `response["__interrupt__"]` to render an approval UI; helper `print_tool_approval(...)` shows the tool and parameters.
+   - Shared time context: call `current_timestamp` once and post a one-line “NOW” note to the thread for recency across agents.
+   - Test flows: approve path, reject path, update request (e.g., “buy only 3 shares of NVIDIA”), and continue within the same thread.
+   - Real-world flow: invest $1,000 with an approval gate before order placement; supervisor coordinates research → trading and handles pause/resume.
+   - [LangGraph Advanced – Combine Supervisor Architecture with Human-in-the-Loop in Multi-Agent AI Systems](https://www.youtube.com/watch?v=W349TTcB0Ng)
 ## Contributing
 
 Feedback and contributions are welcome! Please open issues or submit pull requests for suggestions and improvements.
