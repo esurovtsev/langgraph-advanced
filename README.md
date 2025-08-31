@@ -98,6 +98,17 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
    - Test flows: approve path, reject path, update request (e.g., “buy only 3 shares of NVIDIA”), and continue within the same thread.
    - Real-world flow: invest $1,000 with an approval gate before order placement; supervisor coordinates research → trading and handles pause/resume.
    - [LangGraph Advanced – Combine Supervisor Architecture with Human-in-the-Loop in Multi-Agent AI Systems](https://www.youtube.com/watch?v=W349TTcB0Ng)
+
+7. **Add Long-Term Memory to Multi-Agent AI Systems with Supervisor Architecture** ([07_supervisor_long_term_memory.ipynb](07_supervisor_long_term_memory.ipynb))
+   - Integrate persistent memory using `InMemoryStore` across supervisor and child agents for user-specific order history.
+   - Define memory tools: `get_order_history` (retrieve past orders by `user_id` namespace) and `add_order_to_history` (record new trades with symbol, shares, price).
+   - Research agent: recommends ONE publicly tradable company using `web_search` and `wiki_search` tools, ends with "CHOSEN_COMPANY: <Name>".
+   - Portfolio agent: executes trades for the exact recommended company using `lookup_stock_symbol`, `fetch_stock_data_raw`, `place_order`, and records via `add_order_to_history`.
+   - Supervisor: delegates to research (for ideas) or portfolio (for execution); uses shared store via `get_global_store()` and temporal context from `current_timestamp`.
+   - User isolation: namespace `user_id` for memory access; use `get_user_store()` to access the user’s store.
+   - Real-world flow: invest $1,000 in EV or AI industry—research picks company, portfolio trades and records; query "how many shares do I own?" using memory.
+   - [LangGraph Advanced – Add Long Term Memory to Multi Agent AI Systems with Supervisor Architecture](https://www.youtube.com/watch?v=piri_eR7s)
+
 ## Contributing
 
 Feedback and contributions are welcome! Please open issues or submit pull requests for suggestions and improvements.
