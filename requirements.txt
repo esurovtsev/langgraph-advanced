@@ -5,4 +5,5 @@ langchain_openai
 langgraph
 langgraph-supervisor
 
+trustcall
 yfinance
