@@ -109,6 +109,17 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
    - Real-world flow: invest $1,000 in EV or AI industry—research picks company, portfolio trades and records; query "how many shares do I own?" using memory.
    - [LangGraph Advanced – Add Long Term Memory to Multi Agent AI Systems with Supervisor Architecture](https://www.youtube.com/watch?v=piri_eR7s)
 
+8. **Custom Handoffs in Supervisor Architecture** ([08_supervisor_custom_handoff.ipynb](08_supervisor_custom_handoff.ipynb))
+  - Improve task reasoning with targeted delegation and shared context
+  - Define a custom handoff tool using `create_task_instructions_handoff_tool(...)` to pass explicit `task_instructions` and route control via `Command(goto=...)`
+  - Extend agent state with `TaskState(AgentState)` to carry `task_instructions` across handoffs; compile agents/supervisor with `state_schema=TaskState`
+  - Use `InjectedState` and `InjectedToolCallId` inside tools to access current state and emit a `ToolMessage` containing handoff metadata (`METADATA_KEY_HANDOFF_DESTINATION`) for xray tracing
+  - Supervisor tools include `current_timestamp`, `get_order_history`, and two handoff tools (to `portfolio` and `research`) to guide precise sub-tasks
+  - Portfolio and research agents reuse earlier tools (lookup, market data via yfinance, search) while supervisor orchestrates when to fetch prices vs. query memory
+  - Demonstration: "How are my investments performing?" → supervisor retrieves order history, delegates to portfolio to fetch current prices, then summarizes performance
+  - Compiled with `InMemorySaver()` and `output_mode="full_history"` to visualize routing and handoffs
+  - [LangGraph Advanced – Improve Multi Agent AI Systems with Custom Handoffs in Supervisor Architecture](https://www.youtube.com/watch?v=rn4TkOGYU64)
+
 ## Contributing
 
 Feedback and contributions are welcome! Please open issues or submit pull requests for suggestions and improvements.

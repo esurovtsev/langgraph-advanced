@@ -1,5 +1,6 @@
 .DS_Store
 studio/.langgraph_api
+.windsurf
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
