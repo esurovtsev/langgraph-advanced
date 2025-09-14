@@ -127,6 +127,15 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
   - Implement swarm AI agents using `create_swarm()` for parallel handoffs between agents without hierarchy (e.g., web_search ↔ market_data).
   - Compile with `InMemorySaver()` and `output_mode="full_history"` to visualize routing and handoffs.
 
+10. **Simplify Multi-Agent AI Systems by Turning Sub-Agents into Tools with Supervisor Architecture** ([10_supervisor_as_tools.ipynb](10_supervisor_as_tools.ipynb))
+  - Alternative supervisor architecture where sub-agents are turned into tools instead of sharing message lists.
+  - Define `@tool` functions like `research_agent_tool` and `trading_agent_tool` that invoke isolated runs of sub-agents with `RunnableConfig`, passing a task and returning the last `AIMessage` response.
+  - Supervisor is a single `create_react_agent` with tools including `current_timestamp`, `research_agent_tool`, `trading_agent_tool`; no sub-agents under control.
+  - Benefits: isolated executions (no shared message confusion), easier parallelism, clear task definitions.
+  - Drawbacks of traditional shared-message supervisors: long threads confuse agents, hard to parallelize, state sharing issues.
+  - Demonstration: invest $1,000 in AI company → supervisor calls research tool (isolated: web_search/wiki_search → recommends MSFT) → calls trading tool (isolated: lookup/fetch/place → executes order) → summarizes.
+  - [LangGraph Advanced – Simplify Multi-Agent AI Systems by Turning Sub-Agents into Tools with Supervisor Architecture](https://www.youtube.com/watch?v=O7GDyJZ5X8)
+
 ## Contributing
 
 Feedback and contributions are welcome! Please open issues or submit pull requests for suggestions and improvements.
