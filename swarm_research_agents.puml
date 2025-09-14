@@ -1,0 +1,61 @@
+@startuml swarm_simple
+
+skinparam backgroundColor transparent
+skinparam componentStyle rectangle
+skinparam RoundCorner 12
+skinparam ArrowThickness 1.5
+skinparam ArrowColor #5F6368
+skinparam titleFontColor #202124
+skinparam Shadowing false
+
+skinparam actor {
+  BackgroundColor #E8F0FE
+  BorderColor #1A73E8
+}
+
+skinparam component {
+  BackgroundColor<<Entry>> #E6F4EA
+  BorderColor<<Entry>> #34A853
+  BackgroundColor<<Agent>> #F8F9FA
+  BorderColor<<Agent>> #B0BEC5
+  FontStyle<<Entry>> bold
+}
+
+skinparam package {
+  BackgroundColor #F8F9FA
+  BorderColor #B0BEC5
+  FontColor #37474F
+  RoundCorner 12
+}
+
+left to right direction
+title Research Swarm
+
+actor User
+
+package "Swarm" {
+  component "Web Search\n(Entry)" as WS <<Entry>>
+  component "Wiki Search" as WKS <<Agent>>
+  component "Market Data" as MD <<Agent>>
+  component "Timestamp" as TS <<Agent>>
+}
+
+User --> WS : Queries
+
+WS --> WKS : "Need background info"
+WS --> MD : "Need market data"
+WS --> TS : "Need temporal context"
+
+WKS --> WS : "Need current news"
+WKS --> MD : "Need market data"
+WKS --> TS : "Need temporal context"
+
+MD --> WS : "Need current news"
+MD --> WKS : "Need background info"
+MD --> TS : "Need temporal context"
+
+TS --> WS : "Need current news"
+TS --> WKS : "Need background info"
+TS --> MD : "Need market data"
+
+@enduml

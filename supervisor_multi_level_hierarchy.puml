@@ -1,0 +1,86 @@
+@startuml supervisor_multi_level_hierarchy
+
+skinparam backgroundColor transparent
+skinparam componentStyle rectangle
+skinparam RoundCorner 12
+skinparam ArrowThickness 1.5
+skinparam ArrowColor #5F6368
+skinparam titleFontColor #202124
+skinparam Shadowing false
+
+skinparam actor {
+  BackgroundColor #E8F0FE
+  BorderColor #1A73E8
+}
+
+skinparam component {
+  BackgroundColor<<SuperSupervisor>> #FFF3CD
+  BorderColor<<SuperSupervisor>> #E0B400
+  BackgroundColor<<Supervisor>> #FEEFC3
+  BorderColor<<Supervisor>> #E0B400
+  BackgroundColor<<Agent>> #E6F4EA
+  BorderColor<<Agent>> #34A853
+  FontStyle<<SuperSupervisor>> bold
+  FontStyle<<Supervisor>> bold
+}
+ 
+skinparam package {
+  BackgroundColor #F8F9FA
+  BorderColor #B0BEC5
+  FontColor #37474F
+  RoundCorner 12
+}
+
+left to right direction
+
+title Multi-Level Supervisor Hierarchy
+
+actor User as U
+
+' Level 1: Super Supervisor
+component "Super Supervisor" as SS <<SuperSupervisor>>
+
+' Level 2: Supervisors
+package "Research System" as RSYS {
+  component "Research Supervisor" as RS <<Supervisor>>
+}
+
+package "Portfolio System" as PSYS {
+  component "Portfolio Supervisor" as PS <<Supervisor>>
+}
+
+' Level 3: Individual Agents
+package "Research Agents" as RAGENTS {
+  component "Web Search Agent" as WS <<Agent>>
+  component "Wiki Search Agent" as WKS <<Agent>>
+}
+
+package "Portfolio Agents" as PAGENTS {
+  component "Symbol Lookup Agent" as SL <<Agent>>
+  component "Market Data Agent" as MD <<Agent>>
+  component "Order Execution Agent" as OE <<Agent>>
+  component "Record Keeping Agent" as RK <<Agent>>
+}
+
+package "Utility Agents" as UAGENTS {
+  component "Timestamp Agent" as TS <<Agent>>
+  component "History Agent" as HA <<Agent>>
+}
+
+' Connections
+U -- SS : Investment Goals
+
+SS -- RS : Research Tasks
+SS -- PS : Execution Tasks
+SS -- TS : Temporal Context
+SS -- HA : Historical Data
+
+RS -- WS : Current Info
+RS -- WKS : Background Info
+
+PS -- SL : Symbol Verification
+PS -- MD : Market Data
+PS -- OE : Trade Execution
+PS -- RK : Record Keeping
+
+@enduml
