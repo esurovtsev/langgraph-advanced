@@ -4,6 +4,7 @@ langchain_community
 langchain_openai
 langgraph
 langgraph-supervisor
+langgraph-swarm
 
 trustcall
 yfinance

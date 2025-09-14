@@ -120,6 +120,13 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
    - Compiled with `InMemorySaver()` and `output_mode="full_history"` to visualize routing and handoffs
    - [LangGraph Advanced – Improve Multi Agent AI Systems with Custom Handoffs in Supervisor Architecture](https://www.youtube.com/watch?v=rn4TkOGYU64)
 
+9. **Build Hierarchical Multi-Level Supervisor Architectures and Swarm AI Agents** ([09_supervisor_hierarchy_and_swarm.ipynb](09_supervisor_hierarchy_and_swarm.ipynb))
+  - Create hierarchical multi-level supervisor architectures where supervisors control other supervisors.
+  - Extract specialized agents into sub-supervisors: portfolio_supervisor (symbol_lookup, market_data, order_execution, record_keeping) and research_supervisor (web_search, wiki_search).
+  - Build a super_supervisor that orchestrates research_supervisor, portfolio_supervisor, timestamp, and history agents for end-to-end workflows.
+  - Implement swarm AI agents using `create_swarm()` for parallel handoffs between agents without hierarchy (e.g., web_search ↔ market_data).
+  - Compile with `InMemorySaver()` and `output_mode="full_history"` to visualize routing and handoffs.
+
 ## Contributing
 
 Feedback and contributions are welcome! Please open issues or submit pull requests for suggestions and improvements.
