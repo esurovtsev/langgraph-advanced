@@ -136,6 +136,16 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
    - Demonstration: invest $1,000 in AI company → supervisor calls research tool (isolated: web_search/wiki_search → recommends MSFT) → calls trading tool (isolated: lookup/fetch/place → executes order) → summarizes.
    - [LangGraph Advanced – Simplify Multi-Agent AI Systems by Turning Sub-Agents into Tools with Supervisor Architecture](https://www.youtube.com/watch?v=O7GDyJZ5X8)
 
+11. **Build a Custom Supervisor from Scratch** ([11_supervisor_from_scratch.ipynb](11_supervisor_from_scratch.ipynb))
+  - Implement a supervisor two ways: high-level API and low-level LangGraph primitives.
+  - High-level: use `create_supervisor(...)` with `research` and `portfolio` agents, add tools `current_timestamp`, `get_order_history`, compile with `InMemorySaver` and `output_mode="full_history"`.
+  - Low-level: build a custom graph with `StateGraph(MessagesState)`, explicit `START` → `supervisor` edge, return edges from `research`/`portfolio` back to `supervisor`, and destinations `("research", "portfolio", END)`.
+  - Create handoff tools with `create_handoff_tool(agent_name=...)` to route control, emitting a `ToolMessage` and returning `Command(goto=...)` to switch nodes.
+  - Agents: `research_agent` (web and wiki search) for one publicly tradable company; `portfolio_agent` (symbol lookup, market data, place_order, add_order_to_history) for execution and recording.
+  - Shared store: initialize and access with `InMemoryStore` via `get_global_store()`; memory-aware tools use `RunnableConfig` with `user_id` namespaces `("ledger", user_id)`.
+  - End-to-end demo: “invest $1,000 into the most promising AI company” → supervisor delegates research → verifies price → executes a buy → records order → returns a clear summary.
+  - [LangGraph Advanced – Build a Custom Supervisor in AI Multi Agent Systems from Scratch](https://www.youtube.com/watch?v=wgY3IT6j0b0)
+
 ## Contributing
 
 Feedback and contributions are welcome! Please open issues or submit pull requests for suggestions and improvements.
