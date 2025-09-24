@@ -5,6 +5,9 @@ langchain_openai
 langgraph
 langgraph-supervisor
 langgraph-swarm
+langchain-mcp-adapters
 
 trustcall
 yfinance
+pyppeteer==2.0.0
+nest-asyncio
