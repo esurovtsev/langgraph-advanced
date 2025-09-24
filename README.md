@@ -146,6 +146,14 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
   - End-to-end demo: “invest $1,000 into the most promising AI company” → supervisor delegates research → verifies price → executes a buy → records order → returns a clear summary.
   - [LangGraph Advanced – Build a Custom Supervisor in AI Multi Agent Systems from Scratch](https://www.youtube.com/watch?v=wgY3IT6j0b0)
 
+12. **Use MCP Servers in AI Agents with Supervisor Architecture** ([12_mcp_supervisor_agents.ipynb](12_mcp_supervisor_agents.ipynb))
+  - Load MCP server definitions from `mcp_config.json` and initialize a `MultiServerMCPClient` to fetch 70+ GitHub automation tools.
+  - Demonstrate a single `github_agent` ReAct worker bound to all MCP tools on a GitHub activity summary request.
+  - Surface tool overload concerns and auto-generate 3–4 specialized agents via `ChatOpenAI.with_structured_output(AgentDefinitions)` to cluster tools by responsibility.
+  - Instantiate focused agents with assigned tool subsets, then assemble them under `create_supervisor(...)` using the generated system messages and responsibilities.
+  - Supervisor orchestrates GitHub workflows by routing between specialists and returning consolidated responses; tested on analyzing work in `langgraph-advanced`.
+  - [LangGraph Advanced – Use MCP Servers in AI Agents with Supervisor Architecture](https://www.youtube.com/watch?v=2QjrYLT9NMw)
+
 ## Contributing
 
 Feedback and contributions are welcome! Please open issues or submit pull requests for suggestions and improvements.
