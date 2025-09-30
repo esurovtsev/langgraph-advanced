@@ -154,6 +154,15 @@ Each lesson will have a dedicated video tutorial. Links will be provided as less
   - Supervisor orchestrates GitHub workflows by routing between specialists and returning consolidated responses; tested on analyzing work in `langgraph-advanced`.
   - [LangGraph Advanced – Use MCP Servers in AI Agents with Supervisor Architecture](https://www.youtube.com/watch?v=2QjrYLT9NMw)
 
+13. **Dynamically Select Tools in AI Agents for Cleaner and Smarter Workflows** ([13_dynamic_tool_selection.ipynb](13_dynamic_tool_selection.ipynb))
+  - Learn why tool overload degrades agent performance: too many tool descriptions confuse the LLM, leading to poor tool selection and unpredictable reasoning.
+  - Understand the problem: binding 70+ MCP tools to a single agent creates context pollution and makes the model struggle to identify the right tool for each task.
+  - Master dynamic tool selection: use a separate LLM call with structured output (`ToolSelection` schema) to analyze the user query and select only the 5–7 most relevant tools before agent execution.
+  - Implement runtime tool filtering with `Runtime[CustomContext]` and a `configure_model` function that binds only the pre-selected tools to the agent model at runtime.
+  - Compare workflows: baseline (all tools bound) vs. optimized (dynamically filtered tools) to see improved accuracy, reduced token usage, and cleaner reasoning chains.
+  - Apply this pattern to any agent with large tool sets (MCP servers, API collections, enterprise tool catalogs) to maintain predictable behavior as your tool library grows.
+  - [LangGraph Advanced – Dynamically Select Tools in AI Agents for Cleaner and Smarter Workflows](https://www.youtube.com/watch?v=qGaRj3lUfps)
+
 ## Contributing
 
 Feedback and contributions are welcome! Please open issues or submit pull requests for suggestions and improvements.
